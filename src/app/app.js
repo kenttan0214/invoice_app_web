@@ -14,31 +14,31 @@ const store = configureStore(hashHistory);
 const history = syncHistoryWithStore(hashHistory, store);
 
 const ColdRouter = () => (
-    <Router history={history} routes={routes()}/>
+  <Router history={history} routes={routes()}/>
 );
 
 const HotRouter = hot(module)(ColdRouter);
 
 const App = (props) => { // eslint-disable-line react/no-multi-comp
-    const { hotReload } = props;
-    return (
-        <div>
-            <ReduxProvider store={store}>
-                { hotReload ? <HotRouter /> : <ColdRouter/>}
-            </ReduxProvider>
-        </div>
-    );
+  const { hotReload } = props;
+  return (
+    <div>
+      <ReduxProvider store={store}>
+        { hotReload ? <HotRouter /> : <ColdRouter/>}
+      </ReduxProvider>
+    </div>
+  );
 };
 
 App.propTypes = {
-    hotReload: PropTypes.bool,
+  hotReload: PropTypes.bool,
 };
 
 export default withStyles({
-    '@global': {
-        body: {
-            'background-color': colors.bgGrayColor,
-            'margin': 0
-        }
+  '@global': {
+    body: {
+      'background-color': colors.bgGrayColor,
+      'margin': 0
     }
+  }
 })(App);

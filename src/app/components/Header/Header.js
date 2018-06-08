@@ -7,27 +7,27 @@ import { withStyles } from '@material-ui/core/styles';
 import { grid } from 'commonStyles';
 
 const Header = (props) => {
-    const { classes } = props;
-    return (
-        <div>
-            <AppBar position="static">
-                <Toolbar className={classes.container}>
-                    <Typography color="inherit" variant="title"> EIGHT & EIGHT TELECOMMUNICATION </Typography>
-                </Toolbar>
-            </AppBar>
-        </div>
-    );
+  const { classes } = props;
+  return (
+    <div>
+      <AppBar position="static">
+        <Toolbar className={classes.container}>
+          <Typography color="inherit" variant="title"> EIGHT & EIGHT TELECOMMUNICATION </Typography>
+        </Toolbar>
+      </AppBar>
+    </div>
+  );
 };
 
 Header.propTypes = {
-    classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired
 };
 
 
 export default withStyles({
-    container: {
-        width: '100%',
-        maxWidth: grid.maxWidth,
-        margin: '0 auto',
-    }
+  container: {
+    width: '100%',
+    maxWidth: grid.maxWidth,
+    margin: '0 auto',
+  }
 })(Header);
