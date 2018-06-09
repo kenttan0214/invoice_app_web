@@ -1,43 +1,34 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import { withFormik } from 'formik';
+import InnerForm from 'InnerForm/InnerForm';
 
-const LoginForm = (props) => {
-  const { classes } = props;
-
-  return (
-    <div>
-      <div>
-        <TextField
-          fullWidth
-          id="username-input"
-          label="User Name"
-          margin="normal"
-          type="text"
-        />
-      </div>
-      <div>
-        <TextField
-          fullWidth
-          id="password-input"
-          label="Password"
-          margin="normal"
-          type="password"
-        />
-      </div>
-      <Button className={classes.loginBtn} color="primary" variant="raised"> Login </Button>
-    </div>
-  );
+const LoginForm = {
+  // Transform outer props into form values
+  mapPropsToValues: props => {
+    return { email: '', password: '' };
+  },
+  // Add a custom validation function (this can be async too!)
+  validate: (values, props) => {
+    const errors = {};
+    if (!values.email) {
+      errors.email = 'Required';
+    } else if (
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+    ) {
+      errors.email = 'Invalid email address';
+    }
+    return errors;
+  },
+  // Submission handler
+  handleSubmit: (
+    values,
+    {
+      props,
+      setSubmitting,
+      setErrors /* setValues, setStatus, and other goodies */,
+    }
+  ) => {
+    console.log('handle login submit here');
+  },
 };
 
-LoginForm.propTypes = {
-  classes: PropTypes.object.isRequired
-};
-
-export default withStyles({
-  loginBtn: {
-    marginTop: 30
-  }
-})(LoginForm);
+export default withFormik(LoginForm)(InnerForm);

@@ -45,7 +45,7 @@
         "react/display-name": "off",
         "react/jsx-boolean-value": "error",
         "react/jsx-no-undef": "error",
-        "react/jsx-sort-props": "error",
+        "react/jsx-sort-props": "off",
         "react/jsx-uses-react": "error",
         "react/jsx-uses-vars": "error",
         "react/no-did-mount-set-state": "error",
