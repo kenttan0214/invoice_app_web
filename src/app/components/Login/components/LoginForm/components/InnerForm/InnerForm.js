@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import { grid } from 'commonStyles';
 
 // Our inner form component which receives our form's state and updater methods as props
 const InnerForm = ({
+  classes,
   values,
   errors,
   touched,
@@ -39,11 +41,18 @@ const InnerForm = ({
       value={values.password}
     />
     {touched.password && errors.password && <div>{errors.password}</div>}
-    <Button color="primary" variant="raised" type="submit" disabled={isSubmitting}> Login </Button>
+    <Button
+      className={classes.loginButton}
+      color="primary"
+      variant="raised"
+      type="submit"
+      disabled={isSubmitting}
+    > Login </Button>
   </form>
 );
 
 InnerForm.propTypes = {
+  classes: PropTypes.object,
   values: PropTypes.object.isRequired,
   errors: PropTypes.object,
   touched: PropTypes.object,
@@ -53,5 +62,8 @@ InnerForm.propTypes = {
   isSubmitting: PropTypes.bool,
 };
 
-
-export default withStyles()(InnerForm);
+export default withStyles({
+  loginButton: {
+    marginTop: grid.hr * 2
+  }
+})(InnerForm);
