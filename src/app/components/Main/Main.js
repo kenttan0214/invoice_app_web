@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Header from 'Header/Header';
 import { withStyles } from '@material-ui/core/styles';
-import { grid } from 'commonStyles';
 
 const Main = (props) => {
   const { classes, children } = props;
@@ -21,10 +20,10 @@ Main.propTypes = {
   children: PropTypes.node
 };
 
-export default withStyles({
+export default withStyles(({ spacing } ) => ({
   container: {
-    maxWidth: grid.maxWidth,
+    maxWidth: 980,
     margin:' 0 auto',
-    padding: grid.vr * 2
+    padding: spacing.unit * 2
   }
-})(Main);
+}))(Main);

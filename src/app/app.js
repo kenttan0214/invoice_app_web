@@ -8,10 +8,20 @@ import { Provider as ReduxProvider } from 'react-redux';
 import routes from './routes';
 import { configureStore } from './store';
 import { withStyles } from '@material-ui/core/styles';
-import { colors } from 'commonStyles';
 
 const store = configureStore(hashHistory);
 const history = syncHistoryWithStore(hashHistory, store);
+
+const styles = (theme)=> {
+  return {
+    '@global': {
+      body: {
+        'background-color': theme.palette.grey['200'],
+        'margin': 0
+      }
+    }
+  };
+};
 
 const ColdRouter = () => (
   <Router history={history} routes={routes()}/>
@@ -34,11 +44,4 @@ App.propTypes = {
   hotReload: PropTypes.bool,
 };
 
-export default withStyles({
-  '@global': {
-    body: {
-      'background-color': colors.bgGrayColor,
-      'margin': 0
-    }
-  }
-})(App);
+export default withStyles(styles)(App);

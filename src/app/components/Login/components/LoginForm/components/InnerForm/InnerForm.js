@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { grid } from 'commonStyles';
 
 // Our inner form component which receives our form's state and updater methods as props
 const InnerForm = ({
@@ -62,8 +61,8 @@ InnerForm.propTypes = {
   isSubmitting: PropTypes.bool,
 };
 
-export default withStyles({
+export default withStyles(({ spacing }) => ({
   loginButton: {
-    marginTop: grid.hr * 2
+    marginTop: spacing.unit * 3
   }
-})(InnerForm);
+}))(InnerForm);

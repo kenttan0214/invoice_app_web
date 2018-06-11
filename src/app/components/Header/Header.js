@@ -4,7 +4,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-import { grid } from 'commonStyles';
 
 const Header = (props) => {
   const { classes } = props;
@@ -27,7 +26,7 @@ Header.propTypes = {
 export default withStyles({
   container: {
     width: '100%',
-    maxWidth: grid.maxWidth,
+    maxWidth: 980,
     margin: '0 auto',
   }
 })(Header);

@@ -8,7 +8,7 @@ module.exports = {
       '.json'
     ],
     modules: [
-      'node_modules', 'components', 'theme'
+      'node_modules', 'components'
     ]
   },
   output: {

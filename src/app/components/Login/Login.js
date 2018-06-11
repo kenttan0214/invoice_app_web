@@ -20,7 +20,6 @@ const Login = (props) => {
     <Card className={classes.card}>
       <CardContent>
         <Typography
-          className={classes.title}
           component="h2"
           variant="headline"
         > Welcome
@@ -37,9 +36,6 @@ Login.propTypes = {
 };
 
 export default connect(mapStateToProps)(withStyles({
-  title: {
-    fontSize: '1.5rem',
-  },
   card: {
     maxWidth: '390px',
     marginLeft: 'auto',
