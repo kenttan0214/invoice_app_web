@@ -5,15 +5,12 @@ import { matchRoutes } from 'react-router-config';
 import { withStyles } from '@material-ui/core/styles';
 import { withRouter } from 'react-router';
 
-const Main = (props) => {
-  const {
-    classes,
-    children,
-    history,
-    location,
-    route
-  } = props;
-
+const Main = ({
+  classes,
+  history,
+  location,
+  route
+}) => {
   const matchedRoute = matchRoutes(route.routes, location.pathname);
   const routeMatch = matchedRoute[matchedRoute.length - 1].match;
   const activatedRoute = matchedRoute[matchedRoute.length - 1].route;
@@ -37,7 +34,9 @@ const Main = (props) => {
 
 Main.propTypes = {
   classes: PropTypes.object,
-  children: PropTypes.node
+  history: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
+  route: PropTypes.object.isRequired
 };
 
 export default withStyles(({ spacing, palette } ) => ({
