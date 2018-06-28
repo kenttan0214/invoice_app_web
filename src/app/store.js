@@ -6,7 +6,10 @@ import rootReducer from './reducers';
 let store = {};
 
 export function configureStore (history, initialState = {}) {
-  const middlewares = [routerMiddleware(history), thunkMiddleware];
+  const middlewares = [
+    ...(history ? [routerMiddleware(history)] : []),
+    thunkMiddleware
+  ];
 
   // Hook for Redux Devtools Extension - see https://github.com/zalmoxisus/redux-devtools-extension
   const composeEnhancers = (typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : compose;

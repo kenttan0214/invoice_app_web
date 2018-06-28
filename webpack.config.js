@@ -1,10 +1,9 @@
 const webpack = require('webpack');
 const process = require('process');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const AssetsPlugin = require('assets-webpack-plugin');
 const sharedConfig = require('./webpack.config.shared.js');
 
 const isProduction = process.env.NODE_ENV === 'production';
-const entries = (isProduction) ? ['./src/app/app.entry.js'] : ['./src/app/app.entry-hmr.js'];
 
 const config = {
   mode: isProduction ? 'production' : 'development',
@@ -12,7 +11,7 @@ const config = {
   entry: {
     client: [
       'regenerator-runtime/runtime.js',
-      ...entries,
+      './src/app/client.js'
     ]
   },
   output: sharedConfig.output,
@@ -47,9 +46,8 @@ const config = {
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
       'process.env.TARGET': JSON.stringify('BROWSER')
     }),
-    new HtmlWebpackPlugin({  // Also generate a test.html
-      filename: 'index.html',
-      template: 'public/index.html'
+    new AssetsPlugin({
+      fullPath: false,
     })
   ],
 };
@@ -74,7 +72,7 @@ if (isProduction) {
     new webpack.HotModuleReplacementPlugin()
   );
 
-  config.devtool = 'source-map';
+  config.devtool = '#source-map';
 }
 
 module.exports = config;

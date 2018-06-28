@@ -14,7 +14,7 @@ module.exports = {
   output: {
     filename: '[name].js',
     path: __dirname + '/dist/app',
-    publicPath: process.env.DIST_PUBLIC_PATH
+    publicPath: 'http://localhost:9812/dist/app/'
   },
   stats: 'normal'
 };

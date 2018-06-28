@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.en,Intl.~locale.es,Array.prototype.includes,fetch,String.prototype.includes"></script>
+    <style id="jss-server-side">
+      <%- css %>
+    </style>
+  </head>
+  <body>
+    <div data-role="app">
+      <div><%- html %></div>
+    </div>
+    <script>
+      window.__INITIAL_STATE__ = <%- initialState %>;
+    </script>
+    <script src="<%- staticFilesPath + clientJs %>"></script>
+  </body>
+</html>

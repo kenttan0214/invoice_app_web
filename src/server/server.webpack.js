@@ -6,5 +6,7 @@ import webpackConfig from '../../webpack.config';
 export default function (app) {
   const compiler = webpack(webpackConfig);
   app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: webpackConfig.output.publicPath  }));
-  app.use(webpackHotMiddleware(compiler));
+  app.use(webpackHotMiddleware(compiler, {
+    reload: true,
+  }));
 }
