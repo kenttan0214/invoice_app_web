@@ -2,11 +2,11 @@ const webpack = require('webpack');
 const process = require('process');
 const AssetsPlugin = require('assets-webpack-plugin');
 const sharedConfig = require('./webpack.config.shared.js');
-
-const isProduction = process.env.NODE_ENV === 'production';
+const NODE_ENV = process.env.NODE_ENV;
+const isProduction = NODE_ENV === 'production';
 
 const config = {
-  mode: isProduction ? 'production' : 'development',
+  mode: NODE_ENV,
   resolve: sharedConfig.resolve,
   entry: {
     client: [
@@ -43,7 +43,7 @@ const config = {
   stats: sharedConfig.stats,
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
       'process.env.TARGET': JSON.stringify('BROWSER')
     }),
     new AssetsPlugin({
@@ -52,15 +52,12 @@ const config = {
   ],
 };
 
-config.output.filename = '[name].[hash].js';
-
 if (isProduction) {
   config.plugins.push(
     new webpack.LoaderOptionsPlugin({
       minimize: true
     })
   );
-  config.devtool = '#source-map';
 } else {
   // Development
   config.entry.client.unshift(
@@ -71,8 +68,9 @@ if (isProduction) {
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin()
   );
-
-  config.devtool = '#source-map';
 }
+
+config.output.filename = '[name].[hash].js';
+config.devtool = '#source-map';
 
 module.exports = config;

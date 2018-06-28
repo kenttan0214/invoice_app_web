@@ -6,17 +6,21 @@ import serialize from 'serialize-javascript';
 import createHistory from 'history/createMemoryHistory';
 import JssProvider from 'react-jss/lib/JssProvider';
 import { SheetsRegistry } from 'react-jss/lib/jss';
-import { MuiThemeProvider, createMuiTheme, createGenerateClassName } from '@material-ui/core/styles';
 import { Provider as ReduxProvider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import { renderToString } from 'react-dom/server';
 import { renderRoutes } from 'react-router-config';
+import {
+  MuiThemeProvider,
+  createMuiTheme,
+  createGenerateClassName
+} from '@material-ui/core/styles';
+import {
+  DIST_PUBLIC_PATH as urlRoot,
+  IS_PRODUCTION as isProduction
+} from './constant';
 import { configureStore } from '../app/store';
 import { routes } from '../app/routes/routes';
-
-const urlRoot = 'http://localhost:9812/dist/app/';
-const isProduction = true;
-// const isProduction = process.env.NODE_ENV === 'production';
 
 const fileReader = (path) => (
   new Promise((resolve, reject) => {
@@ -24,8 +28,6 @@ const fileReader = (path) => (
       if (err) reject(err);
       resolve(data.toString());
     });
-  }).catch((err) => {
-    console.log(`failed to read file ${err.toString()}`);
   })
 );
 
@@ -41,7 +43,7 @@ const getWebpackAsset = async () => {
   return webpackAsset;
 };
 
-const bootstrapApp = async (html, initialState, css) => {
+const renderFullPage = async (html, initialState, css) => {
   const template = await fileReader('src/server/templates/index.ejs');
   const {
     client: {
@@ -88,7 +90,7 @@ const renderRoute = async ({
 }) => {
   const renderedApp = renderToString(App);
   const css = sheetsRegistry.toString();
-  const renderedHtml = await bootstrapApp(
+  const renderedHtml = await renderFullPage(
     renderedApp,
     store.getState(),
     css
