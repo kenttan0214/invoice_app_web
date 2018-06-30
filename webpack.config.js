@@ -5,6 +5,8 @@ const sharedConfig = require('./webpack.config.shared.js');
 const NODE_ENV = process.env.NODE_ENV;
 const isProduction = NODE_ENV === 'production';
 
+console.log(NODE_ENV);
+
 const config = {
   mode: NODE_ENV,
   resolve: sharedConfig.resolve,
@@ -58,6 +60,7 @@ if (isProduction) {
       minimize: true
     })
   );
+  config.output.filename = '[name].[hash].js';
 } else {
   // Development
   config.entry.client.unshift(
@@ -70,7 +73,6 @@ if (isProduction) {
   );
 }
 
-config.output.filename = '[name].[hash].js';
 config.devtool = '#source-map';
 
 module.exports = config;

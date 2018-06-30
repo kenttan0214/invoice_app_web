@@ -2,6 +2,7 @@ import React from 'react';
 import ejs from 'ejs';
 import fs from 'fs';
 import zlib from 'zlib';
+import Helmet from 'react-helmet';
 import serialize from 'serialize-javascript';
 import createHistory from 'history/createMemoryHistory';
 import JssProvider from 'react-jss/lib/JssProvider';
@@ -51,7 +52,10 @@ const renderFullPage = async (html, initialState, css) => {
     } = {},
   } = await getWebpackAsset();
 
+  const head = Helmet.rewind();
+
   return ejs.render(template , {
+    head,
     clientJs,
     staticFilesPath: urlRoot,
     initialState: serialize(initialState, { isJSON: true, space: 0 }),
