@@ -27,10 +27,14 @@ Header.propTypes = {
 };
 
 
-export default withStyles({
-  container: {
-    width: '100%',
-    maxWidth: 980,
-    margin: '0 auto',
-  }
+export default withStyles((theme) => {
+  return {
+    container: {
+      margin: '0 auto',
+      [theme.breakpoints.up('md')]: {
+        width: '100%',
+        maxWidth: '980px'
+      }
+    }
+  };
 })(Header);

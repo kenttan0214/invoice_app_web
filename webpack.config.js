@@ -1,11 +1,10 @@
+
 const webpack = require('webpack');
 const process = require('process');
 const AssetsPlugin = require('assets-webpack-plugin');
 const sharedConfig = require('./webpack.config.shared.js');
 const NODE_ENV = process.env.NODE_ENV;
 const isProduction = NODE_ENV === 'production';
-
-console.log(NODE_ENV);
 
 const config = {
   mode: NODE_ENV,

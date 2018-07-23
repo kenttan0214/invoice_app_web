@@ -39,7 +39,7 @@ Main.propTypes = {
   route: PropTypes.object.isRequired
 };
 
-export default withStyles(({ spacing, palette } ) => ({
+export default withStyles(({ spacing, palette }) => ({
   '@global': {
     body: {
       'background-color': palette.grey['200'],
